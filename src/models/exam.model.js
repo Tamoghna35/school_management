@@ -34,27 +34,7 @@ const Exam = sequelize.define(
     totalMarks: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    subjectId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Subject, // Links to Subject table
-        key: "subjectId",
-      },
-      allowNull: false,
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
-    },
-    classId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: Class, // Links to Class table
-        key: "classId",
-      },
-      allowNull: false,
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
-    },
+    }
   },
   {
     timestamps: true,

@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
-import { crateClass } from "../controllers/class.controller.js";
+import { addTeacherToCLass } from "../controllers/teacher.controller.js";
 
 const router = Router()
-router.route("/createclass").post(verifyJwt, crateClass)
+router.route("/addTeacherToCLass").post(verifyJwt, addTeacherToCLass)
 
 export default router;

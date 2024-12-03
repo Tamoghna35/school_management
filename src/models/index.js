@@ -56,7 +56,7 @@ Class.hasMany(Student, { foreignKey: "classId" });
 //   otherKey: "classId",
 // });
 
-// one-to-mant between Claa and Subject
+// one-to-many between Claa and Subject
 Subject.belongsTo(Class, { foreignKey: "classId" });
 Class.hasMany(Subject, { foreignKey: "classId" });
 

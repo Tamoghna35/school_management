@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { Student } from "../models/sudent.model.js";
+import { Class } from "../models/class.model.js";
 import {
   isPasswordCorrect,
   saveHashedPassword,
@@ -115,3 +116,26 @@ export const logOutStudent = asyncHandler(async (req, res) => {
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "Student logout Successfully "));
 });
+
+
+
+
+// Add Student to a Class
+export const addStudenToClass = asyncHandler(async (req, res) => {
+  const { classId, name, email } = req.body
+
+  if (!classId || !name || !email) {
+    throw new ApiError(400, "Required fields missing")
+  }
+  const existingclass = await Class.findOne({ where: { classId } })
+  if (!existingclass) {
+    throw new ApiError(400, "Class is not existed")
+  }
+  const registeredStudenToClass = await Student.create({
+    name,
+    email,
+    classId: existingclass.classId
+  })
+
+  return res.status(201).json(new ApiResponse(201, registeredStudenToClass, `Student is registered to class ${existingclass.className}`))
+})
